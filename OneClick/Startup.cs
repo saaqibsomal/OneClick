@@ -17,8 +17,8 @@ namespace OneClick
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MyDbContext>(options =>
-     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+     //       services.AddDbContext<MyDbContext>(options =>
+     //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 
 
