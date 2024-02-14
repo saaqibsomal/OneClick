@@ -29,7 +29,7 @@ namespace OneClick.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         [Route("get-all")]
-        public List<NewsletterEmail> UserRegistration(UserRequest Request)
+        public List<NewsletterEmail> UserRegistration()
         {
             return _newsletterEmailService.GetNewsletters();
         }
