@@ -10,6 +10,7 @@ namespace OneClick.Infrastructure.Db
         }
 
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<NewsletterEmail> NewsletterEmail { get; set; }
 
         // Add other DbSet properties for your other entities if needed
 
@@ -18,7 +19,9 @@ namespace OneClick.Infrastructure.Db
             modelBuilder.Entity<Users>()
             .HasKey(u => u.Id);
 
-           
+
+            modelBuilder.Entity<NewsletterEmail>()
+            .HasKey(u => u.Id);
         }
        
     }
