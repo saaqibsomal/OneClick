@@ -3,6 +3,8 @@ using OneClick.Infrastructure.Repository;
 using OneClick.Service.Interface;
 using Microsoft.Extensions.DependencyInjection;
 using OneClick.Service;
+using OneClick.Infrastructure.Db;
+using Microsoft.EntityFrameworkCore;
 
 namespace OneClick.Utility.Extensions
 {
@@ -14,6 +16,23 @@ namespace OneClick.Utility.Extensions
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<INewsletterEmailRepository, NewsletterEmailRepository>();
             services.AddScoped<INewsletterEmailService, NewsletterEmailService>();
+        }
+
+        public static void AddDBServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<OneClickContext>(options =>
+           options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+        }
+
+        public static void AddCustomCors(this IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigin", builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
         }
     }
 }
