@@ -29,5 +29,14 @@ namespace OneClick.Infrastructure.Repository
             return _context.Users.Where(x => x.UserName == UserName && x.Password == Password).FirstOrDefault();
         }
 
+
+        public Users GetUserByUsername(string UserName)
+        {
+            return _context.Users.Where(x => x.UserName == UserName).FirstOrDefault();
+        }
+        public Users GetUserByEmail(string UserName)
+        {
+            return _context.Users.Where(x => x.UserName == UserName).FirstOrDefault();
+        }
     }
 }

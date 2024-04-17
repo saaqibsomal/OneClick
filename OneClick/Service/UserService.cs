@@ -1,6 +1,7 @@
 ﻿using NuGet.Protocol;
 using OneClick.Infrastructure.Interface;
 using OneClick.Infrastructure.Model;
+using OneClick.Infrastructure.Repository;
 using OneClick.Model;
 using OneClick.Models;
 using OneClick.Service.Interface;
@@ -25,6 +26,14 @@ namespace OneClick.Service
             ResponseMessage response = new ();
             try
             {
+               var userResponse = _usersRepository.GetUserByUsername(userRequest.UserName);
+                if(userResponse is not null)
+                {
+                    response.MessageCode = MessageCode.AlreadyRegister;
+                    response.MessageDescription = MessageDescription.AlreadyRegister;
+                    return response;
+                }
+
                 userRequest.Password = Helper.HashPassword(userRequest.Password);
                 Users dbRequest = UserMapping(userRequest);
                 _usersRepository.AddUser(dbRequest);
