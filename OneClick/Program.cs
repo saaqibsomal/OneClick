@@ -1,3 +1,4 @@
+using OneClick.Utility;
 using OneClick.Utility.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,8 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+Helper.SetFolder(builder.Configuration.GetValue<string>("Folder:Path"));
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseCors("AllowOrigin");

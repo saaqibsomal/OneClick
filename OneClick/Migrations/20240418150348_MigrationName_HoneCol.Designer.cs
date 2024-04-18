@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OneClick.Infrastructure.Db;
 
@@ -11,9 +12,11 @@ using OneClick.Infrastructure.Db;
 namespace OneClick.Migrations
 {
     [DbContext(typeof(OneClickContext))]
-    partial class OneClickContextModelSnapshot : ModelSnapshot
+    [Migration("20240418150348_MigrationName_HoneCol")]
+    partial class MigrationName_HoneCol
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace OneClick.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("OneClick.Infrastructure.Model.CMS", b =>
+            modelBuilder.Entity("OneClick.Infrastructure.Model.HomePage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -54,13 +57,17 @@ namespace OneClick.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("isActive")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CMS");
+                    b.ToTable("HomePage");
                 });
 
             modelBuilder.Entity("OneClick.Infrastructure.Model.NewsletterEmail", b =>

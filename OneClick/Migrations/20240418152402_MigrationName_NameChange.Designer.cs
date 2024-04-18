@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OneClick.Infrastructure.Db;
 
@@ -11,9 +12,11 @@ using OneClick.Infrastructure.Db;
 namespace OneClick.Migrations
 {
     [DbContext(typeof(OneClickContext))]
-    partial class OneClickContextModelSnapshot : ModelSnapshot
+    [Migration("20240418152402_MigrationName_NameChange")]
+    partial class MigrationName_NameChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,7 +63,7 @@ namespace OneClick.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CMS");
+                    b.ToTable("HomePage");
                 });
 
             modelBuilder.Entity("OneClick.Infrastructure.Model.NewsletterEmail", b =>

@@ -21,5 +21,10 @@ namespace OneClick.Utility
                 return builder.ToString();
             }
         }
+
+        public static void SetFolder(string path)
+        {
+            Constants.Folder = path;
+        }
     }
 }
