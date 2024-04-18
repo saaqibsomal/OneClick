@@ -24,9 +24,9 @@ namespace OneClick.Infrastructure.Repository
             _context.SaveChanges();
         }
 
-        public Users Login(string UserName,string Password)
+        public Users Login(string Email, string Password)
         {
-            return _context.Users.Where(x => x.UserName == UserName && x.Password == Password).FirstOrDefault();
+            return _context.Users.Where(x => x.Email == Email && x.Password == Password).FirstOrDefault();
         }
 
 

@@ -63,6 +63,7 @@ namespace OneClick.Service
                 MobileNo = req.MobileNo,
                 Password = req.Password,
                 UserName = req.UserName,
+                Email = req.Email,
 
             };
         }
@@ -72,7 +73,7 @@ namespace OneClick.Service
             try
             {
                 login.Password = Helper.HashPassword(login.Password);
-                var userResponse = _usersRepository.Login(login.UserName, login.Password);
+                var userResponse = _usersRepository.Login(login.Email, login.Password);
                 if(userResponse != null)
                 {
                     response.MessageCode = MessageCode.Success;
