@@ -4,7 +4,7 @@ using OneClick.Infrastructure.Model;
 
 namespace OneClick.Infrastructure.Repository
 {
-    public class CMSRepository: ICSMRepository
+    public class CMSRepository: ICMSRepository
     {
         private OneClickContext _context;
         public CMSRepository(OneClickContext context)

@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography;
+﻿using System.Drawing;
+using System.Drawing.Imaging;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace OneClick.Utility
@@ -26,5 +28,30 @@ namespace OneClick.Utility
         {
             Constants.Folder = path;
         }
+
+        public static bool SaveImage(string Base64,string Path)
+        {
+            // Your base64 string representing the image
+            string base64String = Base64;
+
+            // Convert the base64 string to bytes
+            byte[] imageBytes = Convert.FromBase64String(base64String);
+
+            // Create a MemoryStream from the bytes
+            using (MemoryStream ms = new MemoryStream(imageBytes))
+            {
+                // Create an Image from the MemoryStream
+                Image image = Image.FromStream(ms);
+
+                // Define the path to save the image
+                string imagePath = Path;
+
+                // Save the image to the specified path
+                image.Save(imagePath, ImageFormat.Jpeg);
+            }
+            return true;
+        }
+
+
     }
 }

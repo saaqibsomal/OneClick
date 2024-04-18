@@ -5,8 +5,8 @@ namespace OneClick.Service.Interface
 {
     public interface ICMSService
     {
-        ResponseMessage AddCMS(CMS homePage);
-        ResponseMessage UpdateCMS(CMS homePage);
+        ResponseMessage AddCMS(CMSRequest req, IFormFile file);
+        ResponseMessage UpdateCMS(CMSRequest req, IFormFile file);
         CMS GetCMSValue(string Key);
         List<CMS> GetCMSList(string Key);
     }

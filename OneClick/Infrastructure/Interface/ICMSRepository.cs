@@ -2,7 +2,7 @@
 
 namespace OneClick.Infrastructure.Interface
 {
-    public interface ICSMRepository
+    public interface ICMSRepository
     {
         void AddCMS(CMS homePage);
         void UpdateCMS(CMS req);

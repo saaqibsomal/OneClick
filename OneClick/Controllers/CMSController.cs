@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OneClick.Infrastructure.Model;
+using OneClick.Models;
 using OneClick.Service.Interface;
 
 namespace OneClick.Controllers
@@ -20,18 +21,20 @@ namespace OneClick.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpPost]
         [Route("add-Content")]
-        public IActionResult AddContent(CMS cMS)
+        public IActionResult AddContent(CMSRequest req)
         {
-           var response = _CMSService.AddCMS(cMS);
+
+             IFormFile? file = null;
+            var response = _CMSService.AddCMS(req, file);
             return Ok(response);
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpPost]
         [Route("Update-Content")]
-        public IActionResult UpdateContent(CMS cMS)
+        public IActionResult UpdateContent(IFormFile? file, CMSRequest req)
         {
-            var response = _CMSService.UpdateCMS(cMS);
+            var response = _CMSService.UpdateCMS(req, file);
             return Ok(response);
         }
 

@@ -16,6 +16,8 @@ namespace OneClick.Utility.Extensions
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<INewsletterEmailRepository, NewsletterEmailRepository>();
             services.AddScoped<INewsletterEmailService, NewsletterEmailService>();
+            services.AddScoped<ICMSService, CMSService>();
+            services.AddScoped<ICMSRepository, CMSRepository>();
         }
 
         public static void AddDBServices(this IServiceCollection services, IConfiguration configuration)
