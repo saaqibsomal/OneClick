@@ -19,12 +19,13 @@ namespace OneClick.Controllers
 
 
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         [Route("add-Content")]
-        public IActionResult AddContent(CMSRequest req)
+        public IActionResult AddContent([FromForm] CMSRequest req, IFormFile? file)
         {
 
-             IFormFile? file = null;
+        
             var response = _CMSService.AddCMS(req, file);
             return Ok(response);
         }
@@ -32,7 +33,7 @@ namespace OneClick.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpPost]
         [Route("Update-Content")]
-        public IActionResult UpdateContent(IFormFile? file, CMSRequest req)
+        public IActionResult UpdateContent([FromForm] CMSRequest req, IFormFile? file)
         {
             var response = _CMSService.UpdateCMS(req, file);
             return Ok(response);
