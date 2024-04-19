@@ -8,5 +8,6 @@ namespace OneClick.Infrastructure.Interface
         void UpdateCMS(CMS req);
         CMS GetCMSByKey(string Key);
         List<CMS> GetCMSByKeyList(string Key);
+        bool DeletedCMSByKey(string Key);
     }
 }

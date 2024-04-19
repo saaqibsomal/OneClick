@@ -1,4 +1,5 @@
-﻿using OneClick.Infrastructure.Db;
+﻿using Microsoft.EntityFrameworkCore;
+using OneClick.Infrastructure.Db;
 using OneClick.Infrastructure.Interface;
 using OneClick.Infrastructure.Model;
 
@@ -26,13 +27,25 @@ namespace OneClick.Infrastructure.Repository
 
         public CMS GetCMSByKey(string Key)
         {
-            return _context.CMS.Where(x => x.Key == Key).FirstOrDefault();
+            return _context.CMS.Where(x => x.Key == Key && x.isActive == true).FirstOrDefault();
         }
 
         public List<CMS> GetCMSByKeyList(string Key)
         {
-            return _context.CMS.Where(x => x.Key == Key).ToList();
+            return _context.CMS.Where(x => x.Key == Key && x.isActive == true).ToList();
         }
 
+        public bool DeletedCMSByKey(string Key)
+        {
+            
+            var Data = _context.CMS.Where(x => x.Key == Key).ToList();
+
+            foreach (var item in Data)
+            {
+                _context.CMS.Remove(item);
+            }
+            _context.SaveChanges();
+            return true;
+        }
     }
 }

@@ -8,5 +8,6 @@
         public string Title { get; set; }
         public string Desc { get; set; }
         public bool isVideo { get; set; }
+        public bool isActive { get; set; }
     }
 }

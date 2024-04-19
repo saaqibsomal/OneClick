@@ -9,5 +9,6 @@ namespace OneClick.Service.Interface
         ResponseMessage UpdateCMS(CMSRequest req, IFormFile file);
         CMS GetCMSValue(string Key);
         List<CMS> GetCMSList(string Key);
+        bool DeletedByKey(string Key);
     }
 }

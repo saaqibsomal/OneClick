@@ -117,7 +117,7 @@ namespace OneClick.Service
                     Name = req.Name,
                     Path = Path,
                     Title = req.Title,
-                    isActive = true
+                    isActive = req.isActive
                 };
 
                 _Repository.UpdateCMS(cMS);
@@ -161,5 +161,18 @@ namespace OneClick.Service
             return response;
         }
 
+        public bool DeletedByKey(string Key)
+        {
+            bool isSuccess = false;
+            try
+            {
+                isSuccess = _Repository.DeletedCMSByKey(Key);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"CLASSNAME: {CLASSNAME} METHOD: DeletedByKey Message:{ex.Message} StackTrace:{ex.StackTrace}");
+            }
+            return isSuccess;
+        }
     }
 }

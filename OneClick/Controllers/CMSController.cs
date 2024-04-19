@@ -31,7 +31,7 @@ namespace OneClick.Controllers
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [HttpPost]
+        [HttpPut]
         [Route("Update-Content")]
         public IActionResult UpdateContent([FromForm] CMSRequest req, IFormFile? file)
         {
@@ -40,7 +40,7 @@ namespace OneClick.Controllers
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [HttpPost]
+        [HttpGet]
         [Route("get-Content")]
         public IActionResult getContent(string Key)
         {
@@ -49,12 +49,21 @@ namespace OneClick.Controllers
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [HttpPost]
+        [HttpGet]
         [Route("get-Content-list")]
         public IActionResult getContentList(string Key)
         {
 
             var Response = _CMSService.GetCMSList(Key);
+            return Ok(Response);
+        } 
+        
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpDelete]
+        [Route("cms-content-delete")]
+        public IActionResult CMS_ContentDeleted(string Key)
+        {
+            var Response = _CMSService.DeletedByKey(Key);
             return Ok(Response);
         }
     }
