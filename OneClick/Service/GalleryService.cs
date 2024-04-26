@@ -44,7 +44,7 @@ namespace OneClick.Service
                     }
 
                 Gallery gel = new Gallery();
-                gel.Path = req.Path;
+                gel.Path = filePath;
                 gel.FileName = req.FileName;
                 gel.FileType = req.FileType;
                 _galleryRepository.AddGallery(gel);
@@ -88,7 +88,7 @@ namespace OneClick.Service
             List<string> files = new List<string>();
 
             // Get all files in the specified folder
-            string[] allFiles = Directory.GetFiles(folderPath);
+            string[] allFiles = Directory.GetFiles("File:///" + folderPath);
 
             // Filter files based on valid extensions
             foreach (string file in allFiles)
