@@ -25,24 +25,25 @@ namespace OneClick.Service
             ResponseMessage response = new();
             try
             {
-                string Path = Constants.Folder;
-                if (!Directory.Exists(Path))
+           
+                string basePath = Directory.GetCurrentDirectory();
+                string folderPath = Path.Combine(basePath, Constants.Folder);
+                if (!Directory.Exists(folderPath))
                 {
-                    Directory.CreateDirectory(Path);
+                    Directory.CreateDirectory(folderPath);
                 }
-                 
-                    if (file == null || file.Length == 0)
-                    {
-                        response.MessageCode = "File is not selected or empty.";
-                        response.MessageDescription = MessageDescription.Success;
-                    }
 
-                    var filePath = Path + "/" + req.FileName;
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        file?.CopyTo(stream);
-                    }
+                if (file == null || file.Length == 0)
+                {
+                    response.MessageCode = "File is not selected or empty.";
+                    response.MessageDescription = MessageDescription.Success;
+                }
+                string filePath = Path.Combine(folderPath, file.FileName);
 
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    file?.CopyTo(stream);
+                }
                 Gallery gel = new Gallery();
                 gel.Path = filePath;
                 gel.FileName = req.FileName;
@@ -64,6 +65,8 @@ namespace OneClick.Service
         {
             try
             {
+                string basePath = Directory.GetCurrentDirectory();
+                string folderPath = Path.Combine(basePath, Constants.Folder);
                 List<string> Files =  GetImagesAndVideosFromFolder(Constants.Folder);
                 return Files;
             }
@@ -96,7 +99,7 @@ namespace OneClick.Service
                 string extension = Path.GetExtension(file).ToLower();
                 if (validExtensions.Contains(extension))
                 {
-                    files.Add("File:///" + file);
+                    files.Add(file);
                 }
             }
 
