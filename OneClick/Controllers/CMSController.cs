@@ -24,8 +24,6 @@ namespace OneClick.Controllers
         [Route("add-Content")]
         public IActionResult AddContent([FromForm] CMSRequest req, IFormFile? file)
         {
-
-        
             var response = _CMSService.AddCMS(req, file);
             return Ok(response);
         }
