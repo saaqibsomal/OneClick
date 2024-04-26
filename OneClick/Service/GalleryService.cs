@@ -88,7 +88,7 @@ namespace OneClick.Service
             List<string> files = new List<string>();
 
             // Get all files in the specified folder
-            string[] allFiles = Directory.GetFiles("File:///" + folderPath);
+            string[] allFiles = Directory.GetFiles(folderPath);
 
             // Filter files based on valid extensions
             foreach (string file in allFiles)
@@ -96,7 +96,7 @@ namespace OneClick.Service
                 string extension = Path.GetExtension(file).ToLower();
                 if (validExtensions.Contains(extension))
                 {
-                    files.Add(file);
+                    files.Add("File:///" + file);
                 }
             }
 
