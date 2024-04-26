@@ -18,7 +18,7 @@ namespace OneClick.Infrastructure.Repository
             _context.SaveChanges();
         }
 
-        public List<Gallery> GetGallery(Gallery req)
+        public List<Gallery> GetGallery()
         {
             List<Gallery> Gal = new ();
             Gal = _context.Gallery.ToList();

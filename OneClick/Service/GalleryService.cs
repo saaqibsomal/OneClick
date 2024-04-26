@@ -1,6 +1,7 @@
 ﻿using NuGet.Protocol.Core.Types;
 using OneClick.Infrastructure.Interface;
 using OneClick.Infrastructure.Model;
+using OneClick.Infrastructure.Repository;
 using OneClick.Models;
 using OneClick.Service.Interface;
 using OneClick.Utility;
@@ -57,6 +58,20 @@ namespace OneClick.Service
                 response.MessageDescription = MessageDescription.Failure;
             }
             return response;
+        }
+
+        public List<Gallery> GetGallery()
+        {
+            try
+            {
+                return _galleryRepository.GetGallery();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"CLASSNAME: {CLASSNAME} METHOD: GetNewsletters Message:{ex.Message} StackTrace:{ex.StackTrace}");
+                return new List<Gallery>();
+            }
+
         }
     }
 }

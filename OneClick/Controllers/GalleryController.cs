@@ -27,5 +27,15 @@ namespace OneClick.Controllers
             var response = _galleryService.AddGallery(req, file);
             return Ok(response);
         }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpGet]
+        [Route("get-gallery")]
+        public IActionResult getContentList()
+        {
+
+            var Response = _galleryService.GetGallery();
+            return Ok(Response);
+        }
     }
 }
