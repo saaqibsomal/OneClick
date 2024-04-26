@@ -24,32 +24,8 @@ namespace OneClick.Service
             ResponseMessage response = new();
             try
             {
-                string Path = Constants.Folder + req.Key;
-                if(!Directory.Exists(Path))
-                {
-                    Directory.CreateDirectory(Path);
-                }
-                if (req.isVideo)
-                {
-                    if (file == null || file.Length == 0)
-                    {
-                        response.MessageCode = "File is not selected or empty.";
-                        response.MessageDescription = MessageDescription.Success;
-                    }
-
-                    var filePath = Path + "/" + req.Name;
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        file?.CopyTo(stream);
-                    }
-                }
-                else
-                {
-                    if (!string.IsNullOrEmpty(req.Base64))
-                    {
-                        Helper.SaveImage(req.Base64, Path + "/" + req.Name);
-                    }
-                }
+                string Path = Constants.Folder + req.Name;
+                
 
                 CMS cMS = new CMS
                 {
@@ -81,34 +57,7 @@ namespace OneClick.Service
             ResponseMessage response = new();
             try
             {
-                string Path = Constants.Folder + req.Key;
-                if (!Directory.Exists(Path))
-                {
-                    Directory.CreateDirectory(Path);
-                }
-                if(req.isVideo)
-                {
-                    if (file == null || file.Length == 0)
-                    {
-                        response.MessageCode = "File is not selected or empty.";
-                        response.MessageDescription = MessageDescription.Success;
-                    }
-
-                    var filePath = Path + "/" + req.Name;
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                         file?.CopyTo(stream);
-                    }
-
-                }
-                else
-                {
-                    if (!string.IsNullOrEmpty(req.Base64))
-                    {
-                        Helper.SaveImage(req.Base64, Path + "/" + req.Name);
-                    }
-                }
-               
+                string Path = Constants.Folder + req.Name;
                 CMS cMS = new CMS
                 {
                     CreatedOn = DateTime.Now,
