@@ -1,4 +1,5 @@
-﻿using OneClick.Infrastructure.Interface;
+﻿using OneClick.Common;
+using OneClick.Infrastructure.Interface;
 using OneClick.Infrastructure.Model;
 using OneClick.Models;
 using OneClick.Service.Interface;
@@ -102,6 +103,26 @@ namespace OneClick.Service
             try
             {
                 response = _Repository.GetCMSByKeyList(Key);
+
+
+              //  string basePath = Directory.GetCurrentDirectory();
+              //  string folderPath = Path.Combine(basePath, Constants.Folder);
+
+
+              //  List<string> Files = CommonMethod.GetImagesAndVideosFromFolder(folderPath);
+
+                foreach (var item in response)
+                {
+
+                    byte[] imageBytes = File.ReadAllBytes(item.Path);
+                    // Convert the byte array to a Base64 string
+                    string base64String = Convert.ToBase64String(imageBytes);
+
+                    response.Add(new CMS { Name = item.Path, Path = base64String });
+                }
+
+
+
             }
             catch (Exception ex)
             {

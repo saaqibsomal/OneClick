@@ -1,10 +1,12 @@
 ﻿using NuGet.Protocol.Core.Types;
+using OneClick.Common;
 using OneClick.Infrastructure.Interface;
 using OneClick.Infrastructure.Model;
 using OneClick.Infrastructure.Repository;
 using OneClick.Models;
 using OneClick.Service.Interface;
 using OneClick.Utility;
+using System.Collections.Generic;
 using static OneClick.Models.Constant;
 
 namespace OneClick.Service
@@ -61,19 +63,34 @@ namespace OneClick.Service
             return response;
         }
 
-        public List<string> GetGallery()
+        public List<ImagesResponse> GetGallery()
         {
+            List <ImagesResponse> res = new List<ImagesResponse>();
             try
             {
                 string basePath = Directory.GetCurrentDirectory();
                 string folderPath = Path.Combine(basePath, Constants.Folder);
-                List<string> Files =  GetImagesAndVideosFromFolder(Constants.Folder);
-                return Files;
+
+
+                List<string> Files = CommonMethod.GetImagesAndVideosFromFolder(folderPath);
+
+                foreach (var item in Files)
+                {
+                  
+                    byte[] imageBytes = File.ReadAllBytes(item);
+                    // Convert the byte array to a Base64 string
+                    string base64String = Convert.ToBase64String(imageBytes);
+
+                    res.Add(new ImagesResponse { FileName = item,Base64 = base64String });
+                }
+
+
+                return res;
             }
             catch (Exception ex)
             {
                 _logger.LogError($"CLASSNAME: {CLASSNAME} METHOD: GetNewsletters Message:{ex.Message} StackTrace:{ex.StackTrace}");
-                return new List<string>();
+                return res;
             }
 
         }

@@ -6,6 +6,6 @@ namespace OneClick.Service.Interface
     public interface IGalleryService
     {
         ResponseMessage AddGallery(GalleryRequest req, IFormFile file);
-        List<string> GetGallery();
+        List<ImagesResponse> GetGallery();
     }
 }
