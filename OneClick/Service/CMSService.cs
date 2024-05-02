@@ -24,7 +24,6 @@ namespace OneClick.Service
             ResponseMessage response = new();
             try
             {
-                string Path = Constants.Folder + req.Name;
                 
 
                 CMS cMS = new CMS
@@ -33,7 +32,7 @@ namespace OneClick.Service
                     Desc = req.Desc,
                     Key = req.Key,
                     Name = req.Name,
-                    Path = Path,
+                    Path = req.Path,
                     Title = req.Title,
                     isActive = true
                 };
@@ -57,16 +56,17 @@ namespace OneClick.Service
             ResponseMessage response = new();
             try
             {
-                string Path = Constants.Folder + req.Name;
+                string Path = Constants.Folder;
                 CMS cMS = new CMS
                 {
                     CreatedOn = DateTime.Now,
                     Desc = req.Desc,
                     Key = req.Key,
                     Name = req.Name,
-                    Path = Path,
+                    Path = req.Path,
                     Title = req.Title,
-                    isActive = req.isActive
+                    isActive = req.isActive,
+                    Id = req.id
                 };
 
                 _Repository.UpdateCMS(cMS);

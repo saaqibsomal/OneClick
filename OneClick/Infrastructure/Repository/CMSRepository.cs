@@ -32,7 +32,7 @@ namespace OneClick.Infrastructure.Repository
 
         public List<CMS> GetCMSByKeyList(string Key)
         {
-            return _context.CMS.Where(x => x.Key == Key && x.isActive == true).ToList();
+            return _context.CMS.Where(x => x.isActive == true).ToList();
         }
 
         public bool DeletedCMSByKey(string Key)

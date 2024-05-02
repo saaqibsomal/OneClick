@@ -29,7 +29,7 @@ namespace OneClick.Controllers
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [HttpPut]
+        [HttpPost]
         [Route("Update-Content")]
         public IActionResult UpdateContent([FromForm] CMSRequest req, IFormFile? file)
         {
