@@ -144,5 +144,46 @@ namespace OneClick.Service
             }
             return isSuccess;
         }
+
+
+        public ResponseMessage FileUpload(IFormFile file)
+        {
+            ResponseMessage response = new();
+            try
+            {
+
+
+
+                string basePath = Directory.GetCurrentDirectory();
+                string folderPath = Path.Combine(basePath, Constants.FileUploadFolder);
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+
+                if (file == null || file.Length == 0)
+                {
+                    response.MessageCode = "File is not selected or empty.";
+                    response.MessageDescription = MessageDescription.Success;
+                }
+                string filePath = Path.Combine(folderPath, file.FileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    file?.CopyTo(stream);
+                }
+
+
+                response.MessageCode = MessageCode.Success;
+                response.MessageDescription = MessageDescription.Success;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"CLASSNAME: {CLASSNAME} METHOD: AddCMS Message:{ex.Message} StackTrace:{ex.StackTrace}");
+                response.MessageCode = MessageCode.Failure;
+                response.MessageDescription = MessageDescription.Failure;
+            }
+            return response;
+        }
     }
 }

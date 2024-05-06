@@ -64,5 +64,17 @@ namespace OneClick.Controllers
             var Response = _CMSService.DeletedByKey(Key);
             return Ok(Response);
         }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPost]
+        [Route("file-upload")]
+        public IActionResult FileUpload(IFormFile? file)
+        {
+            var response = _CMSService.FileUpload(file);
+            return Ok(response);
+        }
+
+
     }
 }

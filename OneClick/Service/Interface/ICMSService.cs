@@ -10,5 +10,6 @@ namespace OneClick.Service.Interface
         CMS GetCMSValue(string Key);
         List<CMS> GetCMSList(string Key);
         bool DeletedByKey(string Key);
+        ResponseMessage FileUpload(IFormFile file);
     }
 }

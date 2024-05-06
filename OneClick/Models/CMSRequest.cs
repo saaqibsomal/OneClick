@@ -12,4 +12,10 @@
         public bool isVideo { get; set; }
         public bool isActive { get; set; }
     }
+
+
+    public class FileUploadRequest
+    {
+        public string FilePath { get; set; }
+    }
 }
