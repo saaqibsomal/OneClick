@@ -17,7 +17,6 @@ namespace OneClick.Infrastructure.Model
 
     public class CMSResponse
     {
-   
         public int Id { get; set; }
         public string Key { get; set; }
         public string Path { get; set; }

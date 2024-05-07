@@ -109,7 +109,6 @@ namespace OneClick.Service
             try
             {
                var responseDb = _Repository.GetCMSByKeyList(Key);
-
                 foreach (var item in responseDb)
                 {
                     if (item.Path.Contains("."))
@@ -130,9 +129,6 @@ namespace OneClick.Service
                     }
 
                 }
-
-
-
             }
             catch (Exception ex)
             {
