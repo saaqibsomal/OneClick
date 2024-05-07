@@ -123,6 +123,10 @@ namespace OneClick.Service
                             item.Path = base64String;
                             response.Add(new CMSResponse { Desc = item.Desc, Title = item.Title, Path = item.Path, Base64 = base64String, Name = item.Name, Key = item.Key, CreatedOn = item.CreatedOn });
                         }
+                        else
+                        {
+                            response.Add(new CMSResponse { Desc = item.Desc, Title = item.Title, Path = item.Path, Base64 = string.Empty, Name = item.Name, Key = item.Key, CreatedOn = item.CreatedOn });
+                        }
                     }
 
                 }
