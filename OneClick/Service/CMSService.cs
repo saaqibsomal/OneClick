@@ -118,7 +118,7 @@ namespace OneClick.Service
                         string base64String = Convert.ToBase64String(imageBytes);
                         item.Name = item.Path;
                         item.Path = base64String;
-                        response.Add(new CMSResponse { Desc = item.Desc, Title = item.Title, Path = item.Path, Base64 = base64String, Name = item.Name, Key = item.Key, CreatedOn = item.CreatedOn });
+                        response.Add(new CMSResponse { Desc = item.Desc, Title = item.Title, Path = item.Path, Base64 = base64String, Name = item.Name, Key = item.Key, CreatedOn = item.CreatedOn,Id=item.Id });
                     }
                     else
                     {
