@@ -4,6 +4,7 @@ using OneClick.Infrastructure.Model;
 using OneClick.Models;
 using OneClick.Service.Interface;
 using OneClick.Utility;
+using System.Buffers.Text;
 using static OneClick.Models.Constant;
 
 namespace OneClick.Service
@@ -89,6 +90,11 @@ namespace OneClick.Service
             try
             {
                 response = _Repository.GetCMSByKey(Key);
+                byte[] imageBytes = File.ReadAllBytes(response.Path);
+                string base64String = Convert.ToBase64String(imageBytes);
+                response.Name = response.Path;
+                response.Path = base64String;
+
             }
             catch (Exception ex)
             {
@@ -97,28 +103,28 @@ namespace OneClick.Service
             return response;
         }
 
-        public List<CMS> GetCMSList(string Key)
+        public List<CMSResponse> GetCMSList(string Key)
         {
-            List<CMS> response = new();
+            List<CMSResponse> response = new();
             try
             {
-                response = _Repository.GetCMSByKeyList(Key);
+               var responseDb = _Repository.GetCMSByKeyList(Key);
 
-
-              //  string basePath = Directory.GetCurrentDirectory();
-              //  string folderPath = Path.Combine(basePath, Constants.Folder);
-
-
-              //  List<string> Files = CommonMethod.GetImagesAndVideosFromFolder(folderPath);
-
-                foreach (var item in response)
+                foreach (var item in responseDb)
                 {
+                    if (item.Path.Contains("."))
+                    {
+                        if (File.Exists(item.Path))
+                        {
+                            byte[] imageBytes = File.ReadAllBytes(item.Path);
+                            // Convert the byte array to a Base64 string
+                            string base64String = Convert.ToBase64String(imageBytes);
+                            item.Name = item.Path;
+                            item.Path = base64String;
+                            response.Add(new CMSResponse { Desc = item.Desc, Title = item.Title, Path = item.Path, Base64 = base64String, Name = item.Name, Key = item.Key, CreatedOn = item.CreatedOn });
+                        }
+                    }
 
-                    byte[] imageBytes = File.ReadAllBytes(item.Path);
-                    // Convert the byte array to a Base64 string
-                    string base64String = Convert.ToBase64String(imageBytes);
-
-                    response.Add(new CMS { Name = item.Path, Path = base64String });
                 }
 
 
