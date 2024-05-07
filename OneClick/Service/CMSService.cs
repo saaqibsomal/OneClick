@@ -111,23 +111,19 @@ namespace OneClick.Service
                var responseDb = _Repository.GetCMSByKeyList(Key);
                 foreach (var item in responseDb)
                 {
-                    if (item.Path.Contains("."))
+                    if (File.Exists(item.Path))
                     {
-                        if (File.Exists(item.Path))
-                        {
-                            byte[] imageBytes = File.ReadAllBytes(item.Path);
-                            // Convert the byte array to a Base64 string
-                            string base64String = Convert.ToBase64String(imageBytes);
-                            item.Name = item.Path;
-                            item.Path = base64String;
-                            response.Add(new CMSResponse { Desc = item.Desc, Title = item.Title, Path = item.Path, Base64 = base64String, Name = item.Name, Key = item.Key, CreatedOn = item.CreatedOn });
-                        }
-                        else
-                        {
-                            response.Add(new CMSResponse { Desc = item.Desc, Title = item.Title, Path = item.Path, Base64 = string.Empty, Name = item.Name, Key = item.Key, CreatedOn = item.CreatedOn });
-                        }
+                        byte[] imageBytes = File.ReadAllBytes(item.Path);
+                        // Convert the byte array to a Base64 string
+                        string base64String = Convert.ToBase64String(imageBytes);
+                        item.Name = item.Path;
+                        item.Path = base64String;
+                        response.Add(new CMSResponse { Desc = item.Desc, Title = item.Title, Path = item.Path, Base64 = base64String, Name = item.Name, Key = item.Key, CreatedOn = item.CreatedOn });
                     }
-
+                    else
+                    {
+                        response.Add(new CMSResponse { Desc = item.Desc, Title = item.Title, Path = item.Path, Base64 = string.Empty, Name = item.Name, Key = item.Key, CreatedOn = item.CreatedOn, Id = item.Id });
+                    }
                 }
             }
             catch (Exception ex)
