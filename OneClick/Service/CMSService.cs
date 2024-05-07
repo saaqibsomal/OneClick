@@ -187,5 +187,32 @@ namespace OneClick.Service
             }
             return response;
         }
+
+
+        public CmsResponse GetFiles()
+        {
+            CmsResponse response = new();
+            try
+            {
+                string basePath = Directory.GetCurrentDirectory();
+                string folderPath = Path.Combine(basePath, Constants.FileUploadFolder);
+                List<string> Files = CommonMethod.GetPDFFromFolder(folderPath);
+
+                foreach (var item in Files)
+                {
+                    var GetName = item.Split('\\');
+                    string Name = GetName[GetName.Length - 1];
+
+                    byte[] PdfBytes = File.ReadAllBytes(item);
+                    response.data.Add(new CmsDto { Name = Name, Path = item, PDF = PdfBytes });
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"CLASSNAME: {CLASSNAME} METHOD: AddCMS Message:{ex.Message} StackTrace:{ex.StackTrace}");
+ 
+            }
+            return response;
+        }
     }
 }

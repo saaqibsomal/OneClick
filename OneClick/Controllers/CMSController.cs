@@ -76,5 +76,17 @@ namespace OneClick.Controllers
         }
 
 
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpGet]
+        [Route("get-files")]
+        public IActionResult GetFile()
+        {
+            var response = _CMSService.GetFiles();
+            return Ok(response);
+        }
+
+
     }
 }

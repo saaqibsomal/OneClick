@@ -155,5 +155,33 @@ namespace OneClick.Common
 
             return files;
         }
+
+        public static List<string> GetPDFFromFolder(string folderPath)
+        {
+            // Define a list of image and video file extensions
+            List<string> validExtensions = new List<string>
+        {
+            ".pdf", // Image file extensions
+            ".pdf", // Video file extensions
+        };
+
+            // Create a list to store the file paths
+            List<string> files = new List<string>();
+
+            // Get all files in the specified folder
+            string[] allFiles = Directory.GetFiles(folderPath);
+
+            // Filter files based on valid extensions
+            foreach (string file in allFiles)
+            {
+                string extension = Path.GetExtension(file).ToLower();
+                if (validExtensions.Contains(extension))
+                {
+                    files.Add(file);
+                }
+            }
+
+            return files;
+        }
     }
 }
