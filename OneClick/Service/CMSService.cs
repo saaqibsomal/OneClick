@@ -236,5 +236,33 @@ namespace OneClick.Service
             }
             return response;
         }
+
+        public List<CMSResponse> GetVideo(string Key)
+        {
+            List<CMSResponse> response = new();
+            try
+            {
+                var responseDb = _Repository.GetCMSByKeyList(Key);
+                foreach (var item in responseDb)
+                {
+                    if (File.Exists(item.Path))
+                    {
+
+                        item.Name = item.Path;
+                        response.Add(new CMSResponse { Desc = item.Desc, Title = item.Title, Path = item.Path,  Name = item.Name, Key = item.Key, CreatedOn = item.CreatedOn, Id = item.Id, isActive = item.isActive });
+                    }
+                    else
+                    {
+                        response.Add(new CMSResponse { Desc = item.Desc, Title = item.Title, Path = item.Path, Base64 = string.Empty, Name = item.Name, Key = item.Key, CreatedOn = item.CreatedOn, Id = item.Id, isActive = item.isActive });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"CLASSNAME: {CLASSNAME} METHOD: GetCMSByKeyList Message:{ex.Message} StackTrace:{ex.StackTrace}");
+            }
+            return response;
+        }
+
     }
 }

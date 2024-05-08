@@ -4,6 +4,7 @@
     {
         public static string Folder { get; set; }
         public static string FileUploadFolder { get; set; }
+        public static string VideoFile { get; set; }
     }
 
 

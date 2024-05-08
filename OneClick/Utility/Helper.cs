@@ -28,6 +28,12 @@ namespace OneClick.Utility
         {
             Constants.Folder = path.Split(',')[0];
             Constants.FileUploadFolder = path.Split(',')[1];
+        }  
+        
+        public static void SetFolderVideo(string path)
+        {
+            Constants.VideoFile = path;
+          
         }
 
         public static bool SaveImage(string Base64,string Path)

@@ -63,6 +63,46 @@ namespace OneClick.Service
             return response;
         }
 
+        public ResponseMessage AddVideo(GalleryRequest req, IFormFile file)
+        {
+            ResponseMessage response = new();
+            try
+            {
+
+  
+                if (!Directory.Exists(Constants.VideoFile))
+                {
+                    Directory.CreateDirectory(Constants.VideoFile);
+                }
+
+                if (file == null || file.Length == 0)
+                {
+                    response.MessageCode = "File is not selected or empty.";
+                    response.MessageDescription = MessageDescription.Success;
+                }
+                string filePath = Path.Combine(Constants.VideoFile, file.FileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    file?.CopyTo(stream);
+                }
+                Gallery gel = new Gallery();
+                gel.Path = filePath;
+                gel.FileName = req.FileName;
+                gel.FileType = req.FileType;
+                _galleryRepository.AddGallery(gel);
+                response.MessageCode = MessageCode.Success;
+                response.MessageDescription = MessageDescription.Success;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"CLASSNAME: {CLASSNAME} METHOD: AddCMS Message:{ex.Message} StackTrace:{ex.StackTrace}");
+                response.MessageCode = MessageCode.Failure;
+                response.MessageDescription = MessageDescription.Failure;
+            }
+            return response;
+        }
+
         public List<ImagesResponse> GetGallery()
         {
             List <ImagesResponse> res = new List<ImagesResponse>();
@@ -83,6 +123,33 @@ namespace OneClick.Service
                     string base64String = Convert.ToBase64String(imageBytes);
 
                     res.Add(new ImagesResponse { FileName = item,Base64 = base64String,Path= item });
+                }
+
+
+                return res;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"CLASSNAME: {CLASSNAME} METHOD: GetNewsletters Message:{ex.Message} StackTrace:{ex.StackTrace}");
+                return res;
+            }
+
+        }
+
+
+        public List<ImagesResponse> GetVideo()
+        {
+            List<ImagesResponse> res = new List<ImagesResponse>();
+            try
+            {
+          
+
+
+                List<string> Files = CommonMethod.GetVideoFromFolder(Constants.VideoFile);
+
+                foreach (var item in Files)
+                {
+                    res.Add(new ImagesResponse { FileName = item,Path = item });
                 }
 
 

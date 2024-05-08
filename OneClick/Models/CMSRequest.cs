@@ -18,4 +18,9 @@
     {
         public string FilePath { get; set; }
     }
+
+    public class DeleteFile
+    {
+        public string Path { get; set; }
+    }
 }

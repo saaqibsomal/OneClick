@@ -91,9 +91,20 @@ namespace OneClick.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpDelete]
         [Route("delete-file")]
-        public IActionResult DeleteFile(string path)
+        public IActionResult DeleteFile(DeleteFile req)
         {
-            var response = _CMSService.DeleteFile(path);
+            var response = _CMSService.DeleteFile(req.Path);
+            return Ok(response);
+        }
+
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpGet]
+        [Route("get-videos")]
+        public IActionResult GetVideo(string key)
+        {
+            var response = _CMSService.GetVideo(key);
             return Ok(response);
         }
     }

@@ -13,5 +13,6 @@ namespace OneClick.Service.Interface
         ResponseMessage FileUpload(IFormFile file);
         CmsResponse GetFiles();
         ResponseMessage DeleteFile(string path);
+        List<CMSResponse> GetVideo(string Key);
     }
 }

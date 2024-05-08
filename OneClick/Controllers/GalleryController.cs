@@ -29,12 +29,32 @@ namespace OneClick.Controllers
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPost]
+        [Route("add-video")]
+        public IActionResult AddVideo([FromForm] GalleryRequest req, IFormFile? file)
+        {
+            var response = _galleryService.AddVideo(req, file);
+            return Ok(response);
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         [Route("get-gallery")]
         public IActionResult getContentList()
         {
 
             var Response = _galleryService.GetGallery();
+            return Ok(Response);
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpGet]
+        [Route("get-video")]
+        public IActionResult GetVideo()
+        {
+
+            var Response = _galleryService.GetVideo();
             return Ok(Response);
         }
     }

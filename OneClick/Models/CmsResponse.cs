@@ -11,4 +11,12 @@
         public string Path { get; set; }
         public string Name { get; set; }
     }
+
+
+    public class CmsVideoDto
+    {
+        public byte[] Video { get; set; }
+        public string Path { get; set; }
+        public string Name { get; set; }
+    }
 }
