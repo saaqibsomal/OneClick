@@ -87,6 +87,14 @@ namespace OneClick.Controllers
             return Ok(response);
         }
 
-
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpDelete]
+        [Route("delete-file")]
+        public IActionResult DeleteFile(string path)
+        {
+            var response = _CMSService.DeleteFile(path);
+            return Ok(response);
+        }
     }
 }

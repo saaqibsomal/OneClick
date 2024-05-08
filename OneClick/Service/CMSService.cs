@@ -1,4 +1,5 @@
-﻿using OneClick.Common;
+﻿using Microsoft.DotNet.Scaffolding.Shared.Messaging;
+using OneClick.Common;
 using OneClick.Infrastructure.Interface;
 using OneClick.Infrastructure.Model;
 using OneClick.Models;
@@ -211,6 +212,27 @@ namespace OneClick.Service
             {
                 _logger.LogError($"CLASSNAME: {CLASSNAME} METHOD: AddCMS Message:{ex.Message} StackTrace:{ex.StackTrace}");
  
+            }
+            return response;
+        }
+
+        public ResponseMessage DeleteFile(string path)
+        {
+            ResponseMessage response = new();
+            try
+            {
+                if(File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+
+                response.MessageCode = MessageCode.Success;
+                response.MessageDescription = MessageDescription.Success;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"CLASSNAME: {CLASSNAME} METHOD: AddCMS Message:{ex.Message} StackTrace:{ex.StackTrace}");
+
             }
             return response;
         }

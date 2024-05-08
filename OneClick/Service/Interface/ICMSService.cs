@@ -12,5 +12,6 @@ namespace OneClick.Service.Interface
         bool DeletedByKey(string Key);
         ResponseMessage FileUpload(IFormFile file);
         CmsResponse GetFiles();
+        ResponseMessage DeleteFile(string path);
     }
 }
