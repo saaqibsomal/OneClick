@@ -153,14 +153,9 @@ namespace OneClick.Service
             ResponseMessage response = new();
             try
             {
-
-
-
-                string basePath = Directory.GetCurrentDirectory();
-                string folderPath = Path.Combine(basePath, Constants.FileUploadFolder);
-                if (!Directory.Exists(folderPath))
+                if (!Directory.Exists(Constants.FileUploadPdf))
                 {
-                    Directory.CreateDirectory(folderPath);
+                    Directory.CreateDirectory(Constants.FileUploadPdf);
                 }
 
                 if (file == null || file.Length == 0)
@@ -168,13 +163,12 @@ namespace OneClick.Service
                     response.MessageCode = "File is not selected or empty.";
                     response.MessageDescription = MessageDescription.Success;
                 }
-                string filePath = Path.Combine(folderPath, file.FileName);
+                string filePath = Path.Combine(Constants.FileUploadPdf, file.FileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     file?.CopyTo(stream);
                 }
-
 
                 response.MessageCode = MessageCode.Success;
                 response.MessageDescription = MessageDescription.Success;
@@ -194,10 +188,8 @@ namespace OneClick.Service
             CmsResponse response = new();
             try
             {
-                string basePath = Directory.GetCurrentDirectory();
-                string folderPath = Path.Combine(basePath, Constants.FileUploadFolder);
-                List<string> Files = CommonMethod.GetPDFFromFolder(folderPath);
 
+                List<string> Files = CommonMethod.GetPDFFromFolder(Constants.FileUploadPdf);
                 foreach (var item in Files)
                 {
                     var GetName = item.Split('\\');

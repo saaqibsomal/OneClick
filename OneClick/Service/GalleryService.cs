@@ -28,11 +28,11 @@ namespace OneClick.Service
             try
             {
            
-                string basePath = Directory.GetCurrentDirectory();
-                string folderPath = Path.Combine(basePath, Constants.Folder);
-                if (!Directory.Exists(folderPath))
+                //string basePath = Directory.GetCurrentDirectory();
+                //string folderPath = Path.Combine(basePath, Constants.Folder);
+                if (!Directory.Exists(Constants.Folder))
                 {
-                    Directory.CreateDirectory(folderPath);
+                    Directory.CreateDirectory(Constants.Folder);
                 }
 
                 if (file == null || file.Length == 0)
@@ -40,7 +40,7 @@ namespace OneClick.Service
                     response.MessageCode = "File is not selected or empty.";
                     response.MessageDescription = MessageDescription.Success;
                 }
-                string filePath = Path.Combine(folderPath, file.FileName);
+                string filePath = Path.Combine(Constants.Folder, file.FileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {

@@ -26,8 +26,14 @@ namespace OneClick.Utility
 
         public static void SetFolder(string path)
         {
-            Constants.Folder = path.Split(',')[0];
-            Constants.FileUploadFolder = path.Split(',')[1];
+            Constants.Folder = path;
+         
+        }
+              
+        public static void SetFolderPdf(string path)
+        {
+           
+            Constants.FileUploadPdf = path;
         }
 
         public static bool SaveImage(string Base64,string Path)

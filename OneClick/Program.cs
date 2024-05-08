@@ -18,6 +18,7 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 }
 
 Helper.SetFolder(builder.Configuration.GetValue<string>("Folder:Path"));
+Helper.SetFolderPdf(builder.Configuration.GetValue<string>("FolderPdf:Path"));
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseCors("AllowOrigin");
