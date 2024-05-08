@@ -89,7 +89,7 @@ namespace OneClick.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpDelete]
+        [HttpPost]
         [Route("delete-file")]
         public IActionResult DeleteFile(DeleteFile req)
         {
