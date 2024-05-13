@@ -20,6 +20,7 @@ namespace OneClick.Infrastructure.Model
         public int Id { get; set; }
         public string Key { get; set; }
         public string Path { get; set; }
+        public byte[] Video { get; set; }
         public string Base64 { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }

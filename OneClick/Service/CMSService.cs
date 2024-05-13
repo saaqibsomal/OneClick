@@ -119,11 +119,11 @@ namespace OneClick.Service
                         string base64String = Convert.ToBase64String(imageBytes);
                         item.Name = item.Path;
                         item.Path = base64String;
-                        response.Add(new CMSResponse { Desc = item.Desc, Title = item.Title, Path = item.Path, Base64 = base64String, Name = item.Name, Key = item.Key, CreatedOn = item.CreatedOn,Id=item.Id,isActive =item.isActive });
+                        response.Add(new CMSResponse { Desc = item.Desc, Title = item.Title, Path = item.Path, Base64 = base64String, Name = item.Name, Key = item.Key, CreatedOn = item.CreatedOn,Id=item.Id,isActive =item.isActive, Video= imageBytes });
                     }
                     else
                     {
-                        response.Add(new CMSResponse { Desc = item.Desc, Title = item.Title, Path = item.Path, Base64 = string.Empty, Name = item.Name, Key = item.Key, CreatedOn = item.CreatedOn, Id = item.Id,isActive = item.isActive });
+                        response.Add(new CMSResponse { Desc = item.Desc, Title = item.Title, Path = item.Path, Base64 = item.Path, Name = item.Name, Key = item.Key, CreatedOn = item.CreatedOn, Id = item.Id,isActive = item.isActive });
                     }
                 }
             }

@@ -149,7 +149,10 @@ namespace OneClick.Service
 
                 foreach (var item in Files)
                 {
-                    res.Add(new ImagesResponse { FileName = item,Path = item });
+                    byte[] imageBytes = File.ReadAllBytes(item);
+                    // Convert the byte array to a Base64 string
+                    string base64String = Convert.ToBase64String(imageBytes);
+                    res.Add(new ImagesResponse { FileName = item, Path = item, Base64 = base64String });
                 }
 
 
