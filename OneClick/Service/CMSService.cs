@@ -264,5 +264,21 @@ namespace OneClick.Service
             return response;
         }
 
+        public List<string> GetDirectory(string Path)
+        {
+            List<string> response = new();
+            try
+            {
+
+                List<string> Files = CommonMethod.GetVideoFromFolder(Path);
+                response = Files;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"CLASSNAME: {CLASSNAME} METHOD: GetCMSByKeyList Message:{ex.Message} StackTrace:{ex.StackTrace}");
+            }
+            return response;
+        }
+
     }
 }

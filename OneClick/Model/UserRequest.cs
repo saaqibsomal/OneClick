@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OneClick.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace OneClick.Model
 {
@@ -15,5 +16,11 @@ namespace OneClick.Model
             public bool? Deleted { get; set; }
             public DateTime? CreatedOn { get; set; }
             public int? CreatedBy { get; set; }
+    }
+
+    public class UserResponse : ResponseMessage
+    {
+        public string Token { get; set; } = string.Empty;
+
     }
 }

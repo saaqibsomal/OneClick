@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OneClick.Infrastructure.Model;
 using OneClick.Models;
 using OneClick.Service.Interface;
+using System.Data;
 
 namespace OneClick.Controllers
 {
+    [Authorize]
     [Route("api")]
     [ApiController]
     public class CMSController : ControllerBase
@@ -36,7 +39,7 @@ namespace OneClick.Controllers
             var response = _CMSService.UpdateCMS(req, file);
             return Ok(response);
         }
-
+     
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         [Route("get-Content")]
@@ -105,6 +108,16 @@ namespace OneClick.Controllers
         public IActionResult GetVideo(string key)
         {
             var response = _CMSService.GetVideo(key);
+            return Ok(response);
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpGet]
+        [Route("get-directory")]
+        public IActionResult GetDirectory(string key)
+        {
+            var response = _CMSService.GetDirectory(key);
             return Ok(response);
         }
     }

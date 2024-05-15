@@ -5,4 +5,6 @@
         public string MessageCode { get; set; } = string.Empty;
         public string MessageDescription { get; set; } = string.Empty;
     }
+
+    
 }

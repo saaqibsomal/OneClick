@@ -7,6 +7,6 @@ namespace OneClick.Service.Interface
     public interface IUserService
     {
         ResponseMessage AddUser(UserRequest users);
-        ResponseMessage Login(LoginRequest users);
+        UserResponse Login(LoginRequest users);
     }
 }

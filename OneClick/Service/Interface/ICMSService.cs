@@ -14,5 +14,6 @@ namespace OneClick.Service.Interface
         CmsResponse GetFiles();
         ResponseMessage DeleteFile(string path);
         List<CMSResponse> GetVideo(string Key);
+        List<string> GetDirectory(string Path);
     }
 }

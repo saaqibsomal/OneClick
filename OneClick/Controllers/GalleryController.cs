@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OneClick.Infrastructure.Model;
 using OneClick.Models;
 using OneClick.Service;
@@ -6,6 +7,7 @@ using OneClick.Service.Interface;
 
 namespace OneClick.Controllers
 {
+    //[Authorize]
     [Route("api")]
     [ApiController]
     public class GalleryController : Controller
