@@ -7,7 +7,7 @@ using System.Data;
 
 namespace OneClick.Controllers
 {
-    [Authorize]
+   // [Authorize]
     [Route("api")]
     [ApiController]
     public class CMSController : ControllerBase
